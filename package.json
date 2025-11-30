@@ -1,0 +1,23 @@
+{
+  "name": "ai-recipe-generator",
+  "version": "1.0.0",
+  "description": "AI-Powered Recipe Generator & Meal Planner",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build && npm run copy-build",
+    "copy-build": "node -e \"const fs=require('fs');const path=require('path');if(!fs.existsSync('server/public'))fs.mkdirSync('server/public',{recursive:true});require('child_process').exec('xcopy /E /I /Y client\\build server\\public',(e)=>console.log(e?'Error:'+e:'Build copied'))\"",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "migrate": "cd server && npm run migrate",
+    "start": "cd server && npm start",
+    "postinstall": "npm run build"
+  },
+  "keywords": ["recipe", "ai", "meal-planner", "nutrition"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

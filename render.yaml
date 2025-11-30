@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: ai-recipe-generator
+    env: node
+    buildCommand: npm run build
+    startCommand: cd server && npm run migrate && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+    healthCheckPath: /api/health
+
+databases:
+  - name: recipe-db
+    databaseName: recipe_generator
+    user: postgres
+
